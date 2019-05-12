@@ -1,0 +1,9 @@
+<div class="spaced" formGroupName="child1">
+  <div>
+    <label>Child 1</label>
+    <input formControlName="fc" />
+  </div>
+  <div *ngIf="isInvalid()">
+    <span class="error">Invalid Child 1</span>
+  </div>
+</div>

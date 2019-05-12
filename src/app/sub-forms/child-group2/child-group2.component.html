@@ -1,0 +1,33 @@
+<div class="spaced" formGroupName="child2">
+  <div class="spaced">
+    <div>
+      <label>Child 2</label>
+      <input formControlName="fc" />
+    </div>
+    <div *ngIf="isInvalid()">
+      <span class="error">Invalid Child 2</span>
+    </div>
+  </div>
+
+  <div formArrayName="fa">
+    <div class="spaced" *ngFor="let item of fa.controls; let i = index">
+      <div [formGroupName]="i">
+        <label>Item {{ i + 1 }} </label>
+        <div>
+          <input formControlName="inner1" />
+          <div *ngIf="isInvalidInner1(i)">
+            <span class="error">Invalid Inner 1</span>
+          </div>
+        </div>
+        <div>
+          <input formControlName="inner2" />
+          <div *ngIf="isInvalidInner2(i)">
+            <span class="error">Invalid Inner 2</span>
+          </div>
+        </div>
+      </div>
+      <button type="button" (click)="delete(i)">Delete</button>
+    </div>
+  </div>
+  <button type="button" (click)="add()">Add</button>
+</div>

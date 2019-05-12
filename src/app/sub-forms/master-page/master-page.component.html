@@ -1,0 +1,4 @@
+<div *ngIf="masterForm$ | async as masterForm">
+  <app-master-form [masterForm]="masterForm"></app-master-form>
+</div>
+<button (click)="changeChildren()">Change children</button>

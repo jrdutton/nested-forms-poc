@@ -1,0 +1,16 @@
+<form class="spaced" [formGroup]="fg" (ngSubmit)="submit()">
+  <button type="button" (click)="toggle1()">FG1</button>
+  <button type="button" (click)="toggle2()">FG2</button>
+
+  <div *ngIf="show1" [formGroup]="fg1">
+    <app-child-group1></app-child-group1>
+  </div>
+  <div *ngIf="show2" [formGroup]="fg2">
+    <app-child-group1></app-child-group1>
+    <app-child-group2></app-child-group2>
+  </div>
+  <div class="spaced">
+    <button type="submit">Submit</button>
+  </div>
+</form>
+<div>Form Status: {{ formStatus }}</div>
