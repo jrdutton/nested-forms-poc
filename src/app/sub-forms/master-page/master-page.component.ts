@@ -23,4 +23,8 @@ export class MasterPageComponent implements OnInit {
       }
     });
   }
+
+  update(masterForm: MasterForm) {
+    console.log(JSON.stringify(masterForm));
+  }
 }

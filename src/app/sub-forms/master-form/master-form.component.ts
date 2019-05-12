@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { setValues, validate } from '../helpers';
 
@@ -19,9 +19,13 @@ export class MasterFormComponent implements OnInit {
     setValues(this.fg, value);
   }
 
+  @Output()
+  result = new EventEmitter<MasterForm>();
+
   show1 = true;
   show2 = false;
   formStatus = '';
+  formValue = '';
 
   fg1 = this.fb.group({});
   fg2 = this.fb.group({});
@@ -42,5 +46,9 @@ export class MasterFormComponent implements OnInit {
   submit() {
     validate(this.fg);
     this.formStatus = this.fg.valid ? 'VALID' : 'INVALID';
+    this.formValue = JSON.stringify(this.fg.value);
+    if (this.fg.valid) {
+      this.result.emit({ ...this.fg.value } as MasterForm);
+    }
   }
 }
