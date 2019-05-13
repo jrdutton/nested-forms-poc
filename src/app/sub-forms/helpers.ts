@@ -47,7 +47,7 @@ export function validate(control: AbstractControl) {
     control.markAsTouched();
     control.updateValueAndValidity();
 
-    (<any>Object).values(control.controls).forEach(c => {
+    (Object as any).values(control.controls).forEach(c => {
       validate(c);
     });
   } else if (control instanceof FormArray) {
