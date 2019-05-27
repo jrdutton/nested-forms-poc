@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ChildGroup1Component } from './child-group1/child-group1.component';
-import { ChildGroup2Component } from './child-group2/child-group2.component';
-import { MasterFormComponent } from './master-form/master-form.component';
-import { MasterPageComponent } from './master-page/master-page.component';
+import { ChildSharedComponent } from './child-shared/child-shared.component';
+import { Child1Component } from './child1/child1.component';
+import { Child2Component } from './child2/child2.component';
+import { ParentFormComponent } from './parent-form/parent-form.component';
+import { ParentPageComponent } from './parent-page/parent-page.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule],
-  declarations: [MasterFormComponent, ChildGroup1Component, ChildGroup2Component, MasterPageComponent],
-  exports: [MasterPageComponent]
+  declarations: [Child1Component, Child2Component, ChildSharedComponent, ParentFormComponent, ParentPageComponent],
+  exports: [ParentPageComponent]
 })
 export class SubFormsModule {}

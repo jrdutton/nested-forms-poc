@@ -1,0 +1,17 @@
+<div [formGroup]="fg" formGroupName="child2">
+  <div>
+    <label>Child 2</label>
+    <input formControlName="fc" />
+  </div>
+  <div *ngIf="isInvalid()">
+    <span class="error">Invalid Child 2</span>
+  </div>
+  <div>
+    <label>Child Shared 1</label>
+    <app-child-shared controlName="childShared1" [childShared]="child2 ? child2.childShared1 : null"></app-child-shared>
+  </div>
+  <div>
+    <label>Child Shared 2</label>
+    <app-child-shared controlName="childShared2" [childShared]="child2 ? child2.childShared2 : null"></app-child-shared>
+  </div>
+</div>

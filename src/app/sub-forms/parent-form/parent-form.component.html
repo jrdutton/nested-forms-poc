@@ -1,0 +1,15 @@
+<form [formGroup]="fg" (ngSubmit)="submit()">
+  <input type="radio" value="child1" formControlName="fc" />Child 1 <input type="radio" value="child2" formControlName="fc" />Child 2
+
+  <div *ngIf="show1">
+    <app-child1></app-child1>
+  </div>
+  <div *ngIf="show2">
+    <app-child2></app-child2>
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+<div>Form Status: {{ formStatus }}</div>
+<div>Form Value: {{ formValue }}</div>

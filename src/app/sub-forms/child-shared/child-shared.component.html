@@ -1,16 +1,6 @@
-<div class="spaced" formGroupName="child2">
-  <div class="spaced">
-    <div>
-      <label>Child 2</label>
-      <input formControlName="fc" />
-    </div>
-    <div *ngIf="isInvalid()">
-      <span class="error">Invalid Child 2</span>
-    </div>
-  </div>
-
+<div formGroupName="{{ this.controlName }}">
   <div formArrayName="fa">
-    <div class="spaced" *ngFor="let item of fa.controls; let i = index">
+    <div *ngFor="let item of fa.controls; let i = index">
       <div [formGroupName]="i">
         <label>Item {{ i + 1 }} </label>
         <div>

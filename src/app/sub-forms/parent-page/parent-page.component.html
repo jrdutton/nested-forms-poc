@@ -1,0 +1,4 @@
+<div *ngIf="parentForm$ | async as parentForm">
+  <app-parent-form [parentForm]="parentForm" (result)="update($event)"></app-parent-form>
+</div>
+<button (click)="next()">Next</button>
