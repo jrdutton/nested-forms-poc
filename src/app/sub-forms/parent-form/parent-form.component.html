@@ -2,10 +2,10 @@
   <input type="radio" value="child1" formControlName="fc" />Child 1 <input type="radio" value="child2" formControlName="fc" />Child 2
 
   <div *ngIf="show1">
-    <app-child1></app-child1>
+    <app-child1 [child1]="_parentForm ? _parentForm.child1 : null"></app-child1>
   </div>
   <div *ngIf="show2">
-    <app-child2></app-child2>
+    <app-child2 [child2]="_parentForm ? _parentForm.child2 : null"></app-child2>
   </div>
   <div>
     <button type="submit">Submit</button>

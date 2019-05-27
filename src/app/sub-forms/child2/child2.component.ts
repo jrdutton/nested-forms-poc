@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ControlContainer, FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Child2 } from './child2.model';
 
@@ -8,7 +8,7 @@ import { Child2 } from './child2.model';
   styleUrls: ['./child2.component.scss'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class Child2Component implements OnInit, OnDestroy {
+export class Child2Component implements OnInit, OnDestroy, OnChanges {
   @Input()
   child2: Child2;
 
@@ -25,6 +25,11 @@ export class Child2Component implements OnInit, OnDestroy {
       fc: this.fb.control(this.child2 ? this.child2.fc : '', Validators.required)
     });
     this.parent.form.addControl('child2', this.fg);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Child 2 changes');
+    console.log(changes);
   }
 
   ngOnDestroy(): void {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { pairwise, startWith, takeUntil } from 'rxjs/operators';
@@ -11,9 +11,14 @@ import { ParentForm } from './parent-form.model';
   styleUrls: ['./parent-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ParentFormComponent implements OnInit {
+export class ParentFormComponent implements OnInit, OnChanges {
+  _parentForm: ParentForm;
   @Input()
-  parentForm: ParentForm;
+  set parentForm(value: ParentForm) {
+    this._parentForm = value;
+    this.update(value.fc);
+    this.formUtilsService.setValues(this.fg, value);
+  }
 
   @Output()
   result = new EventEmitter<ParentForm>();
@@ -47,22 +52,31 @@ export class ParentFormComponent implements OnInit {
       )
       .subscribe(([oldValue, newValue]) => {
         if (oldValue !== newValue) {
-          switch (newValue) {
-            case 'child1':
-              this.show1 = true;
-              this.show2 = false;
-              break;
-            case 'child2':
-              this.show1 = false;
-              this.show2 = true;
-              break;
-            default:
-              this.show1 = false;
-              this.show2 = false;
-              break;
-          }
+          this.update(newValue);
         }
       });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Parent form changes');
+    console.log(changes);
+  }
+
+  update(value: string) {
+    switch (value) {
+      case 'child1':
+        this.show1 = true;
+        this.show2 = false;
+        break;
+      case 'child2':
+        this.show1 = false;
+        this.show2 = true;
+        break;
+      default:
+        this.show1 = false;
+        this.show2 = false;
+        break;
+    }
   }
 
   submit() {
