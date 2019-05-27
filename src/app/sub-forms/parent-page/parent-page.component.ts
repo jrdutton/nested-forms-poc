@@ -10,8 +10,14 @@ import { ParentForm } from '../parent-form/parent-form.model';
 export class ParentPageComponent implements OnInit {
   initialValue: ParentForm = {
     fc: '',
-    child1: null,
-    child2: null
+    child1: {
+      fc: ''
+    },
+    child2: {
+      fc: '',
+      childShared1: null,
+      childShared2: null
+    }
   };
 
   nextValue: ParentForm = {

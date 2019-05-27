@@ -1,11 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { ControlContainer, FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Child2 } from './child2.model';
 
 @Component({
   selector: 'app-child2',
   templateUrl: './child2.component.html',
-  styleUrls: ['./child2.component.scss']
+  styleUrls: ['./child2.component.scss'],
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class Child2Component implements OnInit, OnDestroy {
   @Input()

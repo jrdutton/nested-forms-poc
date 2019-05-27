@@ -1,12 +1,13 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { FormUtilsService } from 'src/app/core/form-utils.service';
 import { ChildShared } from './child-shared.model';
 
 @Component({
   selector: 'app-child-shared',
   templateUrl: './child-shared.component.html',
-  styleUrls: ['./child-shared.component.scss']
+  styleUrls: ['./child-shared.component.scss'],
+  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class ChildSharedComponent implements OnInit, OnDestroy {
   @Input()
@@ -28,7 +29,7 @@ export class ChildSharedComponent implements OnInit, OnDestroy {
       fa: this.fb.array([])
     });
     this.formUtilsService.setChildControlFactory(this.fa, () => this.faItemFactory());
-    this.formUtilsService.setValues(this.fa, this.childShared.fa);
+    this.formUtilsService.setValues(this.fa, this.childShared ? this.childShared.fa : null);
     this.parent.form.addControl(this.controlName, this.fg);
   }
 
