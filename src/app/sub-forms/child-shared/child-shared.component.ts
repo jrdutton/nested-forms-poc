@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { FormUtilsService } from 'src/app/core/form-utils.service';
+import { FormUtilsService } from '../../core/form-utils.service';
 import { ChildShared } from './child-shared.model';
 
 @Component({
