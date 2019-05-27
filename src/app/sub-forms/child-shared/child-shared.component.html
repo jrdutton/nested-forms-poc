@@ -1,23 +1,23 @@
 <div formGroupName="{{ this.controlName }}">
   <div formArrayName="fa">
-    <div *ngFor="let item of fa.controls; let i = index">
+    <ng-container *ngFor="let item of fa.controls; let i = index">
       <div [formGroupName]="i">
         <label>Item {{ i + 1 }} </label>
         <div>
           <input formControlName="inner1" />
-          <div *ngIf="isInvalidInner1(i)">
+          <ng-container *ngIf="isInvalidInner1(i)">
             <span class="error">Invalid Inner 1</span>
-          </div>
+          </ng-container>
         </div>
         <div>
           <input formControlName="inner2" />
-          <div *ngIf="isInvalidInner2(i)">
+          <ng-container *ngIf="isInvalidInner2(i)">
             <span class="error">Invalid Inner 2</span>
-          </div>
+          </ng-container>
         </div>
       </div>
       <button type="button" (click)="delete(i)">Delete</button>
-    </div>
+    </ng-container>
   </div>
   <button type="button" (click)="add()">Add</button>
 </div>

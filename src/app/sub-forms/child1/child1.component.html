@@ -1,9 +1,7 @@
-<div formGroupName="child1">
-  <div>
-    <label>Child 1</label>
-    <input formControlName="fc" />
-  </div>
-  <div *ngIf="isInvalid()">
+<fieldset class="child1" formGroupName="child1">
+  <legend>Child 1</legend>
+  <input formControlName="fc" />
+  <ng-container *ngIf="isInvalid()">
     <span class="error">Invalid Child 1</span>
-  </div>
-</div>
+  </ng-container>
+</fieldset>

@@ -14,21 +14,34 @@ export class ParentPageComponent implements OnInit {
     child2: null
   };
 
-  private child1PF = {
+  private child1SimplePF = {
     fc: 'child1',
     child1: {
-      fc: 'Child 1'
+      fc: 'Child 1 Simple'
     }
   };
 
-  private child2PF = {
+  private child2SimplePF = {
     fc: 'child2',
     child2: {
-      fc: 'Child 2',
+      fc: 'Child 2 Simple',
       childShared1: {
         fa: [{ inner1: '123', inner2: 'abc' }, { inner1: '456', inner2: 'def' }]
       },
       childShared2: null
+    }
+  };
+
+  private child2ComplexPF = {
+    fc: 'child2',
+    child2: {
+      fc: 'Child 2 Complex',
+      childShared1: {
+        fa: [{ inner1: '123', inner2: 'abc' }]
+      },
+      childShared2: {
+        fa: [{ inner1: '789', inner2: 'ghi' }]
+      }
     }
   };
 
@@ -47,11 +60,15 @@ export class ParentPageComponent implements OnInit {
     this.parentFormData$.next({ ...this.initialPF } as ParentForm);
   }
 
-  child1() {
-    this.parentFormData$.next({ ...this.child1PF } as ParentForm);
+  child1Simple() {
+    this.parentFormData$.next({ ...this.child1SimplePF } as ParentForm);
   }
 
-  child2() {
-    this.parentFormData$.next({ ...this.child2PF } as ParentForm);
+  child2Simple() {
+    this.parentFormData$.next({ ...this.child2SimplePF } as ParentForm);
+  }
+
+  child2Complex() {
+    this.parentFormData$.next({ ...this.child2ComplexPF } as ParentForm);
   }
 }

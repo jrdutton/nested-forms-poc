@@ -16,10 +16,9 @@ export class ParentFormComponent implements OnInit {
   @Input()
   set parentForm(value: ParentForm) {
     this._parentForm = value;
+    this.formUtilsService.setValues(this.fg, value);
     this.formStatus = '';
     this.formValue = '';
-    this.update(value.fc);
-    this.formUtilsService.setValues(this.fg, value);
   }
 
   @Output()
