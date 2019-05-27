@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { pairwise, startWith, takeUntil } from 'rxjs/operators';
@@ -11,11 +11,13 @@ import { ParentForm } from './parent-form.model';
   styleUrls: ['./parent-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ParentFormComponent implements OnInit, OnChanges {
+export class ParentFormComponent implements OnInit {
   _parentForm: ParentForm;
   @Input()
   set parentForm(value: ParentForm) {
     this._parentForm = value;
+    this.formStatus = '';
+    this.formValue = '';
     this.update(value.fc);
     this.formUtilsService.setValues(this.fg, value);
   }
@@ -55,11 +57,6 @@ export class ParentFormComponent implements OnInit, OnChanges {
           this.update(newValue);
         }
       });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('Parent form changes');
-    console.log(changes);
   }
 
   update(value: string) {
