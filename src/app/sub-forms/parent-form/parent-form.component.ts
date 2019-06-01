@@ -24,42 +24,32 @@ export class ParentFormComponent implements OnInit {
   @Output()
   result = new EventEmitter<ParentForm>();
 
+  fc: FormControl;
   fg: FormGroup;
 
   show1 = false;
   show2 = false;
+
   formStatus = '';
   formValue = '';
-
-  get fc() {
-    return this.fg.get('fc') as FormControl;
-  }
 
   private ngUnsubscribe: Subject<any> = new Subject();
 
   constructor(private fb: FormBuilder, private formUtilsService: FormUtilsService) {
+    this.fc = this.fb.control('');
     this.fg = this.fb.group({
-      fc: this.fb.control(this.parentForm ? this.parentForm.fc : '')
+      fc: this.fc
     });
+
+    this.update();
   }
 
   ngOnInit() {
-    this.fc.valueChanges
-      .pipe(
-        // tslint:disable-next-line: deprecation
-        startWith(null),
-        pairwise(),
-        takeUntil(this.ngUnsubscribe)
-      )
-      .subscribe(([oldValue, newValue]) => {
-        if (oldValue !== newValue) {
-          this.update(newValue);
-        }
-      });
+    this.fc.valueChanges.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.update());
   }
 
-  update(value: string) {
-    switch (value) {
+  update() {
+    switch (this.fc.value) {
       case 'child1':
         this.show1 = true;
         this.show2 = false;

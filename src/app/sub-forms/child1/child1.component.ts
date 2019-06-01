@@ -9,21 +9,26 @@ import { Child1 } from './child1.model';
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class Child1Component implements OnInit, OnDestroy {
+  _child1: Child1;
   @Input()
-  child1: Child1;
-
-  fg: FormGroup;
-
-  get fc() {
-    return this.fg.get('fc') as FormControl;
+  set child1(value: Child1) {
+    this._child1 = value;
+    if (value) {
+      this.fg.patchValue(value);
+    }
   }
 
-  constructor(private fb: FormBuilder, private parent: FormGroupDirective) {}
+  fc: FormControl;
+  fg: FormGroup;
+
+  constructor(private fb: FormBuilder, private parent: FormGroupDirective) {
+    this.fc = this.fb.control('', Validators.required);
+    this.fg = this.fb.group({
+      fc: this.fc
+    });
+  }
 
   ngOnInit() {
-    this.fg = this.fb.group({
-      fc: this.fb.control(this.child1 ? this.child1.fc : '', Validators.required)
-    });
     this.parent.form.addControl('child1', this.fg);
   }
 

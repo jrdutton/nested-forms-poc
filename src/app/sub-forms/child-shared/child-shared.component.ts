@@ -10,26 +10,28 @@ import { ChildShared } from './child-shared.model';
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class ChildSharedComponent implements OnInit, OnDestroy {
+  _childShared: ChildShared;
   @Input()
-  childShared: ChildShared;
+  set childShared(value: ChildShared) {
+    this._childShared = value;
+    this.formUtilsService.setValues(this.fg, value);
+  }
 
   @Input()
   controlName: string;
 
+  fa: FormArray;
   fg: FormGroup;
 
-  get fa() {
-    return this.fg.get('fa') as FormArray;
-  }
-
-  constructor(private fb: FormBuilder, private parent: FormGroupDirective, private formUtilsService: FormUtilsService) {}
-
-  ngOnInit() {
+  constructor(private fb: FormBuilder, private parent: FormGroupDirective, private formUtilsService: FormUtilsService) {
+    this.fa = this.fb.array([]);
     this.fg = this.fb.group({
-      fa: this.fb.array([])
+      fa: this.fa
     });
     this.formUtilsService.setChildControlFactory(this.fa, () => this.faItemFactory());
-    this.formUtilsService.setValues(this.fa, this.childShared ? this.childShared.fa : null);
+  }
+
+  ngOnInit() {
     this.parent.form.addControl(this.controlName, this.fg);
   }
 
