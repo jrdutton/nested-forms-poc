@@ -11,7 +11,8 @@ export class ParentPageComponent implements OnInit {
   private initialPF = {
     fc: '',
     child1: null,
-    child2: null
+    child2: null,
+    childOuter: null
   };
 
   private child1SimplePF = {
@@ -45,6 +46,31 @@ export class ParentPageComponent implements OnInit {
     }
   };
 
+  private childOuterPF = {
+    fc: 'childOuter',
+    childOuter: {
+      fa: [
+        {
+          childInner: {
+            fa: [
+              {
+                child2: {
+                  fc: 'Child 2 Complex',
+                  childShared1: {
+                    fa: [{ inner1: '123', inner2: 'abc' }]
+                  },
+                  childShared2: {
+                    fa: [{ inner1: '789', inner2: 'ghi' }]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  };
+
   parentFormData$ = new BehaviorSubject<ParentForm>(this.initialPF);
   parentForm$ = this.parentFormData$.asObservable();
 
@@ -70,5 +96,9 @@ export class ParentPageComponent implements OnInit {
 
   child2Complex() {
     this.parentFormData$.next({ ...this.child2ComplexPF } as ParentForm);
+  }
+
+  childOuter() {
+    this.parentFormData$.next({ ...this.childOuterPF } as ParentForm);
   }
 }

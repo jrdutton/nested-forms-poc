@@ -40,15 +40,7 @@ export class ChildSharedComponent implements OnInit, OnDestroy {
   }
 
   inner1(i: number) {
-    if (!this.fa) {
-      return null;
-    }
-
-    if (!this.fa.controls) {
-      return null;
-    }
-
-    if (this.fa.controls.length < i + 1) {
+    if (!this.fa || !this.fa.controls || this.fa.controls.length < i + 1) {
       return null;
     }
 
@@ -56,15 +48,7 @@ export class ChildSharedComponent implements OnInit, OnDestroy {
   }
 
   inner2(i: number) {
-    if (!this.fa) {
-      return null;
-    }
-
-    if (!this.fa.controls) {
-      return null;
-    }
-
-    if (this.fa.controls.length < i + 1) {
+    if (!this.fa || !this.fa.controls || this.fa.controls.length < i + 1) {
       return null;
     }
 

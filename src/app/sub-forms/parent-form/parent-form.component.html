@@ -1,12 +1,16 @@
 <form [formGroup]="fg" (ngSubmit)="submit()">
   <div class="radio">
     <input type="radio" value="child1" formControlName="fc" />Child 1 <input type="radio" value="child2" formControlName="fc" />Child 2
+    <input type="radio" value="childOuter" formControlName="fc" />Child Outer
   </div>
   <ng-container *ngIf="show1">
     <app-child1 [child1]="_parentForm ? _parentForm.child1 : null"></app-child1>
   </ng-container>
   <ng-container *ngIf="show2">
     <app-child2 [child2]="_parentForm ? _parentForm.child2 : null"></app-child2>
+  </ng-container>
+  <ng-container *ngIf="showOuter">
+    <app-child-outer [childOuter]="_parentForm ? _parentForm.childOuter : null"></app-child-outer>
   </ng-container>
   <div class="submit">
     <button type="submit">Submit</button>

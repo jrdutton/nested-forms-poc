@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { pairwise, startWith, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { FormUtilsService } from '../../core/form-utils.service';
 import { ParentForm } from './parent-form.model';
 
@@ -29,6 +29,7 @@ export class ParentFormComponent implements OnInit {
 
   show1 = false;
   show2 = false;
+  showOuter = false;
 
   formStatus = '';
   formValue = '';
@@ -53,14 +54,22 @@ export class ParentFormComponent implements OnInit {
       case 'child1':
         this.show1 = true;
         this.show2 = false;
+        this.showOuter = false;
         break;
       case 'child2':
         this.show1 = false;
         this.show2 = true;
+        this.showOuter = false;
+        break;
+      case 'childOuter':
+        this.show1 = false;
+        this.show2 = false;
+        this.showOuter = true;
         break;
       default:
         this.show1 = false;
         this.show2 = false;
+        this.showOuter = false;
         break;
     }
   }

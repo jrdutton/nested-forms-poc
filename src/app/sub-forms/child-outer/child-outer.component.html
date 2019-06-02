@@ -1,0 +1,15 @@
+<fieldset class="childOuter" formGroupName="childOuter">
+  <legend>Child Outer</legend>
+  <div formArrayName="fa">
+    <ng-container *ngFor="let item of fa.controls; let i = index">
+      <div [formGroupName]="i">
+        <label>Outer Item {{ i + 1 }} </label>
+        <ng-container *ngIf="showInner(i)">
+          <app-child2 [child2]="_childOuter ? _childOuter.fa[i].childInner : null"></app-child2>
+        </ng-container>
+      </div>
+      <button type="button" (click)="delete(i)">Delete</button>
+    </ng-container>
+  </div>
+  <button type="button" (click)="add()">Add</button>
+</fieldset>
