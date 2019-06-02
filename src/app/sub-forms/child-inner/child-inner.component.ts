@@ -20,14 +20,6 @@ export class ChildInnerComponent implements OnInit, OnDestroy {
   fa: FormArray;
   fg: FormGroup;
 
-  show2(i: number) {
-    if (this._childInner && this._childInner.fa && this._childInner.fa[i] && this._childInner.fa[i].child2) {
-      return true;
-    }
-
-    return false;
-  }
-
   constructor(private fb: FormBuilder, private parent: FormGroupDirective, private formUtilsService: FormUtilsService) {
     this.fa = this.fb.array([]);
     this.fg = this.fb.group({

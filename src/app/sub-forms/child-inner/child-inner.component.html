@@ -2,11 +2,9 @@
   <legend>Child Inner</legend>
   <div formArrayName="fa">
     <ng-container *ngFor="let item of fa.controls; let i = index">
-      <div [formGroupName]="i">
+      <div [formGroup]="fa.controls[i]" [formGroupName]="i">
         <label>Inner Item {{ i + 1 }} </label>
-        <ng-container *ngIf="show2(i)">
-          <app-child2 [child2]="_childInner ? _childInner.fa[i].child2 : null"></app-child2>
-        </ng-container>
+        <app-child2 [child2]="_childInner ? _childInner.fa[i].child2 : null"></app-child2>
       </div>
       <button type="button" (click)="delete(i)">Delete</button>
     </ng-container>
