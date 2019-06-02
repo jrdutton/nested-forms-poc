@@ -52,6 +52,8 @@ export class ChildInnerComponent implements OnInit, OnDestroy {
   }
 
   faItemFactory(): AbstractControl {
-    return this.fb.group({});
+    return this.fb.group({
+      fa: this.fb.array([])
+    });
   }
 }
