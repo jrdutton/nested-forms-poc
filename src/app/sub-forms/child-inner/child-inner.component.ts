@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { FormUtilsService } from 'src/app/core/form-utils.service';
 import { ChildInner } from './child-inner.model';
-import { Child2 } from '../child2/child2.model';
 
 @Component({
   selector: 'app-child-inner',
@@ -45,15 +44,9 @@ export class ChildInnerComponent implements OnInit, OnDestroy {
     this.fa.removeAt(i);
   }
 
-  child2(i: number) {
-    return this._childInner && this._childInner.fa[i] && this._childInner.fa[i].child2
-      ? this._childInner.fa[i].child2
-      : ({ childShared1: {}, childShared2: {} } as Child2);
-  }
-
   faItemFactory(): AbstractControl {
     return this.fb.group({
-      fa: this.fb.array([])
+      input: this.fb.control('')
     });
   }
 }

@@ -45,15 +45,9 @@ export class ChildOuterComponent implements OnInit, OnDestroy {
     this.fa.removeAt(i);
   }
 
-  childInner(i: number) {
-    return this._childOuter && this._childOuter.fa[i] && this._childOuter.fa[i].childInner
-      ? this._childOuter.fa[i].childInner
-      : ({
-          fa: []
-        } as ChildInner);
-  }
-
   faItemFactory(): AbstractControl {
-    return this.fb.group({});
+    return this.fb.group({
+      input: this.fb.control('')
+    });
   }
 }

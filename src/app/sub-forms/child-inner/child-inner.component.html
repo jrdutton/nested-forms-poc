@@ -2,9 +2,9 @@
   <legend>Child Inner</legend>
   <div formArrayName="fa">
     <ng-container *ngFor="let item of fa.controls; let i = index">
-      <div [formGroup]="fa.controls[i]" [formGroupName]="i">
+      <div [formGroupName]="i">
         <label>Inner Item {{ i + 1 }} </label>
-        <app-child2 [child2]="child2(i)"></app-child2>
+        <input formControlName="input" />
       </div>
       <button type="button" (click)="delete(i)">Delete</button>
     </ng-container>

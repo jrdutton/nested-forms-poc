@@ -51,18 +51,21 @@ export class ParentPageComponent implements OnInit {
     childOuter: {
       fa: [
         {
+          input: '123',
           childInner: {
             fa: [
               {
-                child2: {
-                  fc: 'Child 2 Complex',
-                  childShared1: {
-                    fa: [{ inner1: '123', inner2: 'abc' }]
-                  },
-                  childShared2: {
-                    fa: [{ inner1: '789', inner2: 'ghi' }]
-                  }
-                }
+                input: '456'
+              }
+            ]
+          }
+        },
+        {
+          input: '321',
+          childInner: {
+            fa: [
+              {
+                input: '654'
               }
             ]
           }
