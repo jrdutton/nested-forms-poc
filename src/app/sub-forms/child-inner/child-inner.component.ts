@@ -46,7 +46,9 @@ export class ChildInnerComponent implements OnInit, OnDestroy {
   }
 
   child2(i: number) {
-    return this._childInner && this._childInner.fa[i] ? this._childInner.fa[i].child2 : ({ childShared1: {}, childShared2: {} } as Child2);
+    return this._childInner && this._childInner.fa[i] && this._childInner.fa[i].child2
+      ? this._childInner.fa[i].child2
+      : ({ childShared1: {}, childShared2: {} } as Child2);
   }
 
   faItemFactory(): AbstractControl {
