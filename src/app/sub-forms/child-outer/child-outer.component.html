@@ -4,7 +4,7 @@
     <ng-container *ngFor="let item of fa.controls; let i = index">
       <div [formGroup]="fa.controls[i]" [formGroupName]="i">
         <label>Outer Item {{ i + 1 }} </label>
-        <app-child-inner [childInner]="_childOuter ? _childOuter.fa[i].childInner : null"></app-child-inner>
+        <app-child-inner [childInner]="childInner(i)"></app-child-inner>
       </div>
       <button type="button" (click)="delete(i)">Delete</button>
     </ng-container>

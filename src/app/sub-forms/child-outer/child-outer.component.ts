@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { FormUtilsService } from 'src/app/core/form-utils.service';
 import { ChildOuter } from './child-outer.model';
+import { ChildInner } from '../child-inner/child-inner.model';
 
 @Component({
   selector: 'app-child-outer',
@@ -42,6 +43,14 @@ export class ChildOuterComponent implements OnInit, OnDestroy {
 
   delete(i: number) {
     this.fa.removeAt(i);
+  }
+
+  childInner(i: number) {
+    return this._childOuter && this._childOuter.fa[i] && this._childOuter.fa[i].childInner
+      ? this._childOuter.fa[i].childInner
+      : ({
+          fa: []
+        } as ChildInner);
   }
 
   faItemFactory(): AbstractControl {
