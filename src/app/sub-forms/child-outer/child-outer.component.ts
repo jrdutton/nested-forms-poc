@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { FormUtilsService } from 'src/app/core/form-utils.service';
 import { ChildOuter } from './child-outer.model';
-import { ChildInner } from '../child-inner/child-inner.model';
 
 @Component({
   selector: 'app-child-outer',
