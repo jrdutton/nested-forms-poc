@@ -1,13 +1,4 @@
 <fieldset class="childInner" formGroupName="childInner">
   <legend>Child Inner</legend>
-  <div formArrayName="fa">
-    <ng-container *ngFor="let item of fa.controls; let i = index">
-      <div [formGroupName]="i">
-        <label>Inner Item {{ i + 1 }} </label>
-        <input formControlName="input" />
-      </div>
-      <button type="button" (click)="delete(i)">Delete</button>
-    </ng-container>
-  </div>
-  <button type="button" (click)="add()">Add</button>
+  <input formControlName="input" />
 </fieldset>

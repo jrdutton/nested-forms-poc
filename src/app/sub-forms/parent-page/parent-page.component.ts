@@ -53,21 +53,27 @@ export class ParentPageComponent implements OnInit {
         {
           input: '123',
           childInner: {
-            fa: [
-              {
-                input: '456'
-              }
-            ]
+            input: '654'
           }
         },
         {
           input: '321',
           childInner: {
-            fa: [
-              {
-                input: '654'
-              }
-            ]
+            input: '654'
+          }
+        }
+      ]
+    }
+  };
+
+  private childOuter2PF = {
+    fc: 'childOuter',
+    childOuter: {
+      fa: [
+        {
+          input: 'abc',
+          childInner: {
+            input: 'def'
           }
         }
       ]
@@ -103,5 +109,9 @@ export class ParentPageComponent implements OnInit {
 
   childOuter() {
     this.parentFormData$.next({ ...this.childOuterPF } as ParentForm);
+  }
+
+  childOuter2() {
+    this.parentFormData$.next({ ...this.childOuter2PF } as ParentForm);
   }
 }

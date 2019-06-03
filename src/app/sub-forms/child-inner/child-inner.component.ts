@@ -1,5 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { Component, Input, OnDestroy, OnInit, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
+import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { FormUtilsService } from 'src/app/core/form-utils.service';
 import { ChildInner } from './child-inner.model';
 
@@ -9,23 +9,22 @@ import { ChildInner } from './child-inner.model';
   styleUrls: ['./child-inner.component.scss'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class ChildInnerComponent implements OnInit, OnDestroy {
-  _childInner: ChildInner;
+export class ChildInnerComponent implements OnInit, OnDestroy, OnChanges {
   @Input()
-  set childInner(value: ChildInner) {
-    this._childInner = value;
-    this.formUtilsService.setValues(this.fg, value);
-  }
+  childInner: ChildInner;
 
-  fa: FormArray;
   fg: FormGroup;
 
   constructor(private fb: FormBuilder, private parent: FormGroupDirective, private formUtilsService: FormUtilsService) {
-    this.fa = this.fb.array([]);
     this.fg = this.fb.group({
-      fa: this.fa
+      input: this.fb.control('')
     });
-    this.formUtilsService.setChildControlFactory(this.fa, () => this.faItemFactory());
+  }
+
+  ngOnChanges(changes: { [key: string]: SimpleChange }): void {
+    if (changes.childInner && changes.childInner.isFirstChange()) {
+      this.formUtilsService.setValues(this.fg, changes.childInner.currentValue);
+    }
   }
 
   ngOnInit() {
@@ -34,19 +33,5 @@ export class ChildInnerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.parent.form.removeControl('childInner');
-  }
-
-  add() {
-    this.fa.push(this.faItemFactory());
-  }
-
-  delete(i: number) {
-    this.fa.removeAt(i);
-  }
-
-  faItemFactory(): AbstractControl {
-    return this.fb.group({
-      input: this.fb.control('')
-    });
   }
 }

@@ -5,7 +5,7 @@
       <div [formGroup]="fa.controls[i]" [formGroupName]="i">
         <label>Outer Item {{ i + 1 }} </label>
         <input formControlName="input" />
-        <app-child-inner></app-child-inner>
+        <app-child-inner [childInner]="childInner(i)"></app-child-inner>
       </div>
       <button type="button" (click)="delete(i)">Delete</button>
     </ng-container>

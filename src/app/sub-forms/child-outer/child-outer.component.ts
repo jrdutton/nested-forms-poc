@@ -49,4 +49,8 @@ export class ChildOuterComponent implements OnInit, OnDestroy {
       input: this.fb.control('')
     });
   }
+
+  childInner(i: number) {
+    return this._childOuter && this._childOuter.fa[i] && this._childOuter.fa[i].childInner ? this._childOuter.fa[i].childInner : null;
+  }
 }
