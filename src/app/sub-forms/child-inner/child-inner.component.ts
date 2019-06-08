@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
-import { FormUtilsService } from 'src/app/core/form-utils.service';
+import { FormUtilsService } from '../../core/form-utils.service';
 import { ChildInner } from './child-inner.model';
 
 @Component({
