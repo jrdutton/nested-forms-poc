@@ -27,7 +27,7 @@ export class ParentPageComponent implements OnInit {
     child2: {
       fc: 'Child 2 Simple',
       childShared1: {
-        fa: [{ inner1: '123', inner2: 'abc' }, { inner1: '456', inner2: 'def' }]
+        fa: [{ inner1: 'C2S 123', inner2: 'C2S abc' }, { inner1: 'C2S 456', inner2: 'C2S def' }]
       },
       childShared2: null
     }
@@ -38,10 +38,10 @@ export class ParentPageComponent implements OnInit {
     child2: {
       fc: 'Child 2 Complex',
       childShared1: {
-        fa: [{ inner1: '123', inner2: 'abc' }]
+        fa: [{ inner1: 'C2C 123', inner2: 'C2C abc' }, { inner1: 'C2C 456', inner2: 'C2C def' }]
       },
       childShared2: {
-        fa: [{ inner1: '789', inner2: 'ghi' }]
+        fa: [{ inner1: 'C2C 321', inner2: 'C2C cba' }, { inner1: 'C2C 654', inner2: 'C2C fed' }]
       }
     }
   };
@@ -51,15 +51,15 @@ export class ParentPageComponent implements OnInit {
     childOuter: {
       fa: [
         {
-          input: '123',
+          input: 'CO 123',
           childInner: {
-            input: '654'
+            input: 'CO abc'
           }
         },
         {
-          input: '321',
+          input: 'CO 456',
           childInner: {
-            input: '654'
+            input: 'CO def'
           }
         }
       ]
@@ -71,9 +71,9 @@ export class ParentPageComponent implements OnInit {
     childOuter: {
       fa: [
         {
-          input: 'abc',
+          input: 'CO2 123',
           childInner: {
-            input: 'def'
+            input: 'CO2 abc'
           }
         }
       ]

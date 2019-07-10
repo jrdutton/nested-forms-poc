@@ -43,24 +43,62 @@ export class FormUtilsService {
     }
   }
 
-  validate(control: AbstractControl) {
+  reset(
+    control: AbstractControl,
+    markAsPristineOpts?: {
+      onlySelf?: boolean;
+    },
+    markAsUntouchedOpts?: {
+      onlySelf?: boolean;
+    }
+  ) {
     if (control instanceof FormGroup) {
-      control.markAsTouched();
-      control.updateValueAndValidity();
+      control.markAsPristine(markAsPristineOpts);
+      control.markAsUntouched(markAsUntouchedOpts);
 
       (Object as any).values(control.controls).forEach(c => {
-        this.validate(c);
+        this.reset(c, markAsPristineOpts, markAsUntouchedOpts);
       });
     } else if (control instanceof FormArray) {
-      control.markAsTouched();
-      control.updateValueAndValidity();
+      control.markAsPristine(markAsPristineOpts);
+      control.markAsUntouched(markAsUntouchedOpts);
 
       control.controls.forEach(c => {
-        this.validate(c);
+        this.reset(c, markAsPristineOpts, markAsUntouchedOpts);
       });
     } else {
-      control.markAsTouched();
-      control.updateValueAndValidity();
+      control.markAsPristine(markAsPristineOpts);
+      control.markAsUntouched(markAsUntouchedOpts);
+    }
+  }
+
+  validate(
+    control: AbstractControl,
+    markAsTouchedOpts?: {
+      onlySelf?: boolean;
+    },
+    updateValueAndValidityOpts?: {
+      onlySelf?: boolean;
+      emitEvent?: boolean;
+    }
+  ) {
+    if (control instanceof FormGroup) {
+      control.markAsTouched(markAsTouchedOpts);
+      control.updateValueAndValidity(updateValueAndValidityOpts);
+
+      (Object as any).values(control.controls).forEach(c => {
+        this.validate(c, markAsTouchedOpts, updateValueAndValidityOpts);
+      });
+    } else if (control instanceof FormArray) {
+      control.markAsTouched(markAsTouchedOpts);
+      control.updateValueAndValidity(updateValueAndValidityOpts);
+
+      control.controls.forEach(c => {
+        this.validate(c, markAsTouchedOpts, updateValueAndValidityOpts);
+      });
+    } else {
+      control.markAsTouched(markAsTouchedOpts);
+      control.updateValueAndValidity(updateValueAndValidityOpts);
     }
   }
 }

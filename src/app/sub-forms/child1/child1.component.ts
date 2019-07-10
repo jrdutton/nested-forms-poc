@@ -1,5 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange } from '@angular/core';
 import { ControlContainer, FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormUtilsService } from '../../core/form-utils.service';
 import { Child1 } from './child1.model';
 
 @Component({
@@ -8,24 +9,24 @@ import { Child1 } from './child1.model';
   styleUrls: ['./child1.component.scss'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class Child1Component implements OnInit, OnDestroy {
-  _child1: Child1;
+export class Child1Component implements OnInit, OnDestroy, OnChanges {
   @Input()
-  set child1(value: Child1) {
-    this._child1 = value;
-    if (value) {
-      this.fg.patchValue(value);
-    }
-  }
+  child1: Child1;
 
   fc: FormControl;
   fg: FormGroup;
 
-  constructor(private fb: FormBuilder, private parent: FormGroupDirective) {
+  constructor(private fb: FormBuilder, private parent: FormGroupDirective, private formUtilsService: FormUtilsService) {
     this.fc = this.fb.control('', Validators.required);
     this.fg = this.fb.group({
       fc: this.fc
     });
+  }
+
+  ngOnChanges(changes: { [key: string]: SimpleChange }): void {
+    if (changes.child1) {
+      this.formUtilsService.setValues(this.fg, changes.child1.currentValue);
+    }
   }
 
   ngOnInit() {

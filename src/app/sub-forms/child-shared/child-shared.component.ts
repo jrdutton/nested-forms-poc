@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange } from '@angular/core';
 import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { FormUtilsService } from '../../core/form-utils.service';
 import { ChildShared } from './child-shared.model';
@@ -9,13 +9,9 @@ import { ChildShared } from './child-shared.model';
   styleUrls: ['./child-shared.component.scss'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class ChildSharedComponent implements OnInit, OnDestroy {
-  _childShared: ChildShared;
+export class ChildSharedComponent implements OnInit, OnDestroy, OnChanges {
   @Input()
-  set childShared(value: ChildShared) {
-    this._childShared = value;
-    this.formUtilsService.setValues(this.fg, value);
-  }
+  childShared: ChildShared;
 
   @Input()
   controlName: string;
@@ -29,6 +25,12 @@ export class ChildSharedComponent implements OnInit, OnDestroy {
       fa: this.fa
     });
     this.formUtilsService.setChildControlFactory(this.fa, () => this.faItemFactory());
+  }
+
+  ngOnChanges(changes: { [key: string]: SimpleChange }): void {
+    if (changes.childShared) {
+      this.formUtilsService.setValues(this.fg, changes.childShared.currentValue);
+    }
   }
 
   ngOnInit() {

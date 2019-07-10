@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange } from '@angular/core';
 import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { FormUtilsService } from '../../core/form-utils.service';
 import { ChildOuter } from './child-outer.model';
@@ -9,13 +9,9 @@ import { ChildOuter } from './child-outer.model';
   styleUrls: ['./child-outer.component.scss'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class ChildOuterComponent implements OnInit, OnDestroy {
-  _childOuter: ChildOuter;
+export class ChildOuterComponent implements OnInit, OnDestroy, OnChanges {
   @Input()
-  set childOuter(value: ChildOuter) {
-    this._childOuter = value;
-    this.formUtilsService.setValues(this.fg, value);
-  }
+  childOuter: ChildOuter;
 
   fa: FormArray;
   fg: FormGroup;
@@ -26,6 +22,12 @@ export class ChildOuterComponent implements OnInit, OnDestroy {
       fa: this.fa
     });
     this.formUtilsService.setChildControlFactory(this.fa, () => this.faItemFactory());
+  }
+
+  ngOnChanges(changes: { [key: string]: SimpleChange }): void {
+    if (changes.childOuter && changes.childOuter.isFirstChange()) {
+      this.formUtilsService.setValues(this.fg, changes.childOuter.currentValue);
+    }
   }
 
   ngOnInit() {
@@ -51,6 +53,6 @@ export class ChildOuterComponent implements OnInit, OnDestroy {
   }
 
   childInner(i: number) {
-    return this._childOuter && this._childOuter.fa[i] && this._childOuter.fa[i].childInner ? this._childOuter.fa[i].childInner : null;
+    return this.childOuter && this.childOuter.fa[i] && this.childOuter.fa[i].childInner ? this.childOuter.fa[i].childInner : null;
   }
 }

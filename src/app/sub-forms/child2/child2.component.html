@@ -6,10 +6,10 @@
   </ng-container>
   <div class="childShared1" *ngIf="show1">
     <label>Child Shared 1</label>
-    <app-child-shared controlName="childShared1" [childShared]="_child2 ? _child2.childShared1 : null"></app-child-shared>
+    <app-child-shared controlName="childShared1" [childShared]="child2 ? child2.childShared1 : null"></app-child-shared>
   </div>
   <div class="childShared2" *ngIf="show2">
     <label>Child Shared 2</label>
-    <app-child-shared controlName="childShared2" [childShared]="_child2 ? _child2.childShared2 : null"></app-child-shared>
+    <app-child-shared controlName="childShared2" [childShared]="child2 ? child2.childShared2 : null"></app-child-shared>
   </div>
 </fieldset>
